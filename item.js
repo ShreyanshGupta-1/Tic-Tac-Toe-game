@@ -27,7 +27,11 @@ boxes.forEach((box) => {
         checkwinner();
     });
 });
+const draw=()=>{
+    msg.innerText="Game is Draw";
+    msgcont.classList.remove("hide");
 
+}
 const enablebtn=()=>{
     for(let box of boxes){
         box.disabled=false;
@@ -45,6 +49,7 @@ const showwinner=(winner)=>{
     disablebtn();
 }
 const checkwinner=()=>{
+    let winnerfound=false;
     for(let pattern of winPattern){
         let pos1val=boxes[pattern[0]].innerText;
         let pos2val=boxes[pattern[1]].innerText;
@@ -54,18 +59,31 @@ const checkwinner=()=>{
             if(pos1val==pos2val && pos2val==pos3val){
                 console.log(pos1val,"is the winner");
                 showwinner(pos1val);
+                winnerfound=true;
             }
+        }
+    }
+    if(winnerfound===false){
+        let allboxfilled=true;
+        for(let box of boxes){
+            if(box.innerText===""){
+                allboxfilled=false;
+                break;
+            }
+        }
+        if(allboxfilled==true){
+            draw();
         }
     }
 }
 
 const resetGame=()=>{
-    turn0=true;
+    turnO=true;
     enablebtn();
     msgcont.classList.add("hide");
 }
 const newGame=()=>{
-    turn0=true;
+    turnO=true;
     enablebtn();
     msgcont.classList.add("hide");
 }
